@@ -309,9 +309,27 @@ public class BytecodeTextTestGenerated extends AbstractBytecodeTextTest {
             JetTestUtils.assertAllTestsPresentByMetadata(this.getClass(), new File("compiler/testData/codegen/bytecodeText/deadCodeElimination"), Pattern.compile("^(.+)\\.kt$"), true);
         }
 
+        @TestMetadata("arrayConstructor.kt")
+        public void testArrayConstructor() throws Exception {
+            String fileName = JetTestUtils.navigationMetadata("compiler/testData/codegen/bytecodeText/deadCodeElimination/arrayConstructor.kt");
+            doTest(fileName);
+        }
+
+        @TestMetadata("boxing.kt")
+        public void testBoxing() throws Exception {
+            String fileName = JetTestUtils.navigationMetadata("compiler/testData/codegen/bytecodeText/deadCodeElimination/boxing.kt");
+            doTest(fileName);
+        }
+
         @TestMetadata("lastReturn.kt")
         public void testLastReturn() throws Exception {
             String fileName = JetTestUtils.navigationMetadata("compiler/testData/codegen/bytecodeText/deadCodeElimination/lastReturn.kt");
+            doTest(fileName);
+        }
+
+        @TestMetadata("simpleConstructor.kt")
+        public void testSimpleConstructor() throws Exception {
+            String fileName = JetTestUtils.navigationMetadata("compiler/testData/codegen/bytecodeText/deadCodeElimination/simpleConstructor.kt");
             doTest(fileName);
         }
     }
