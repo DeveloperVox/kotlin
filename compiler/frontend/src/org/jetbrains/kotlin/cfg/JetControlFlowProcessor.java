@@ -119,7 +119,7 @@ public class JetControlFlowProcessor {
 
         Label afterDeclaration = builder.createUnboundLabel("after local declaration");
 
-        builder.nondeterministicJump(afterDeclaration, parent, null);
+        builder.nondeterministicJump(afterDeclaration, subroutine, null);
         generate(subroutine);
         builder.bindLabel(afterDeclaration);
     }
