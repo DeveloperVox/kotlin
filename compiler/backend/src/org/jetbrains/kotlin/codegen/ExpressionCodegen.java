@@ -1710,6 +1710,7 @@ public class ExpressionCodegen extends JetVisitor<StackValue, StackValue> implem
         }
 
         if (tryCatchBlockEnd != null) {
+            InlineCodegenUtil.generateGoToTryCatchBlockEndMarker(v);
             v.goTo(tryCatchBlockEnd);
         }
 
