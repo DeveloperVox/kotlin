@@ -625,7 +625,7 @@ private fun ExtractionData.inferParametersInfo(
                 val parameter = extractedDescriptorToParameter.getOrPut(descriptorToExtract) {
                     val argumentText =
                             if (hasThisReceiver && extractThis)
-                                "this@${parameterType.getConstructor().getDeclarationDescriptor()!!.getName().asString()}"
+                                "this@${descriptorToExtract.getName().asString()}"
                             else
                                 (thisExpr ?: ref).getText() ?: throw AssertionError("'this' reference shouldn't be empty: code fragment = ${getCodeFragmentText()}")
 
