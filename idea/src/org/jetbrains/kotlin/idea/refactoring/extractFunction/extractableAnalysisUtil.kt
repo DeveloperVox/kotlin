@@ -569,11 +569,12 @@ private fun ExtractionData.inferParametersInfo(
             return info
         }
 
-        val receiverArgument = resolvedCall?.getExtensionReceiver()
-        val receiver = when(receiverArgument) {
-            ReceiverValue.NO_RECEIVER -> resolvedCall?.getDispatchReceiver()
-            else -> receiverArgument
-        } ?: ReceiverValue.NO_RECEIVER
+        val extensionReceiver = resolvedCall?.getExtensionReceiver()
+        val receiver = when {
+                           originalDescriptor !is CallableMemberDescriptor -> ReceiverValue.NO_RECEIVER
+                           extensionReceiver == ReceiverValue.NO_RECEIVER -> resolvedCall?.getDispatchReceiver()
+                           else -> extensionReceiver
+                       } ?: ReceiverValue.NO_RECEIVER
 
         val thisDescriptor = (receiver as? ThisReceiver)?.getDeclarationDescriptor()
         val hasThisReceiver = thisDescriptor != null
@@ -616,6 +617,7 @@ private fun ExtractionData.inferParametersInfo(
                     receiver.exists() -> receiver.getType()
                     else -> bindingContext[BindingContext.SMARTCAST, originalRef]
                             ?: bindingContext[BindingContext.EXPRESSION_TYPE, originalRef]
+                            ?: (descriptorToExtract as? VariableDescriptor)?.getType()
                             ?: DEFAULT_PARAMETER_TYPE
                 }
 
