@@ -160,7 +160,7 @@
             <isfalse value="${bootstrap.build.no.tests}"/>
             <then>
                 <echo message="Replacing!"/>
-                <replaceregexp match="OBJECT\$" replace="object">
+                <replaceregexp match="OBJECT\$" flags="g" replace="object">
                     <fileset dir="${basedir}">
                         <include name="**/*.java"/>
                     </fileset>
